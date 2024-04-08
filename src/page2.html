@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple To-Do List</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        ul li {
+            margin: 5px 0;
+        }
+        ul li button {
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<h2  >My To-Do List</h2>
+
+<input type="text" id="todoInput" placeholder="What do you need to do?">
+<button onclick="addTodo()">Add</button>
+
+<ul id="todoList"></ul>
+
+<script>
+    function addTodo() {
+        var input = document.getElementById('todoInput');
+        var itemText = input.value.trim();
+
+        if (itemText === '') {
+            alert('Please write something to add.');
+            return;
+        }
+
+        var listItem = document.createElement('li');
+        listItem.textContent = itemText;
+
+        var removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        removeButton.onclick = function() {
+            listItem.remove();
+        };
+
+        listItem.appendChild(removeButton);
+
+        var list = document.getElementById('todoList');
+        list.appendChild(listItem);
+
+        input.value = '';
+    }
+
+    document.getElementById('todoInput').addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            addTodo();
+        }
+    });
+</script>
+
+</body>
+</html>
